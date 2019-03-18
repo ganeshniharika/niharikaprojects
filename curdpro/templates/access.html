@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>access</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<table border="2px">
+    <tr>
+        <th>pnumber</th>
+        <th>pname</th>
+        <th>pcost</th>
+        <th>pclass</th>
+        <th>pweight</th>
+    </tr>
+     {% for i in data %}
+        <tr>
+             <td>{{ i.product_number }}</td>
+             <td>{{ i.product_name }}</td>
+             <td>{{ i.product_cost }}</td>
+             <td>{{ i.product_class }}</td>
+             <td>{{ i.product_weight }}</td>
+         </tr>
+
+     {% endfor %}
+
+
+</table>
+</body>
+</html>
