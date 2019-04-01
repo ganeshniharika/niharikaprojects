@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>feedback</title>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<style>
+
+    #sub{
+        margin-top: 10px;
+        margin-left: 100px;
+        margin-bottom: 15px;
+    }
+    #clr{
+        margin-left:15px;
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+    form{
+        border:2px blue solid;
+        background-color: aqua;
+        border-radius: 10px;
+    }
+    h1{
+        background-color: deeppink;
+        margin-left: 20px;
+        margin-right: 20px;
+        border-radius: 20px;
+        color:maroon;
+    }
+    .container{
+        margin-top: 40px;
+        margin-left: 250px;
+    }
+    label{
+        color: chocolate;
+        font-size:20px;
+    }
+</style>
+<script type="text/javascript">
+ var countryLists = new Array(4)
+ //countryLists["empty"] = ["Select a Country"];
+ countryLists["First Class"] = [200,100,500];
+ countryLists["Gold"] = [280,250,350];
+ countryLists["Platinum"] = [350,150,650];
+ //countryLists["Europe"]= ["Britain", "France", "Spain", "Germany"];
+
+ function countryChange(selectObj) {
+ var idx = selectObj.selectedIndex;
+ var which = selectObj.options[idx].value;
+ cList = countryLists[which];
+
+ var cSelect = document.getElementById("country");
+
+ var len=cSelect.options.length;
+ while (cSelect.options.length > 0) {
+ cSelect.remove(0);
+ }
+ var newOption;
+
+ for (var i=0; i<cList.length; i++) {
+ newOption = document.createElement("option");
+ newOption.value = cList[i];
+ newOption.text=cList[i];
+
+ try {
+ cSelect.add(newOption);
+ }
+ catch (e) {
+ cSelect.appendChild(newOption);
+ }
+ }
+ }
+</script>
+<body>
+{% if data %}
+    {% for i in data %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+             <form align="center" method="post" action="/bookconform">
+                 {% csrf_token %}
+                 <h1>Movie Booking Page</h1>
+                      <table align="center">
+                    <tr>
+                        <td><label>Movie Id</label></td>
+                        <td><input type="text" name="id" value="{{ i.id }}" readonly><br><br></td>
+                    </tr>
+
+                    <tr>
+                        <td><label>Movie Name</label></td>
+                        <td><input type="text" name="mname" value="{{ i.m_name }}" readonly><br><br></td>
+                    </tr>
+                    <tr>
+                        <td><label>Movie Time</label></td>
+                        <td> <select name="time">
+                                    <option value="9:30 AM">9:30 AM</option>
+                                    <option value="12:30 PM">12:30 PM</option>
+                                    <option value="4:00 PM">4:00 PM</option>
+                                    <option value="6:40 PM">6:40 PM</option>
+                                    <option value="9:40 PM">9:40 PM</option>
+                             </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Theatre Name</label>&nbsp&nbsp&nbsp&nbsp&nbsp
+                        <td> <select name="theatre">
+                                  <option value="imax" name="IMAX">IMAX</option>
+                                  <option value="gvk" name="GVK">GVK</option>
+                                  <option value="amb" name="AMB">AMB</option>
+                             </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="continent">class</label><br>&nbsp&nbsp&nbsp&nbsp&nbsp
+                        </td>
+                        <td><select name="class" id="continent" onchange="countryChange(this);">
+                                  <option value="imax" name="First">First Class</option>
+                                  <option value="gvk" name="Gold">Gold</option>
+                                  <option value="amb" name="Platinum">Platinum</option>
+                             </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="country">Cost</label></td>
+                        <td><select id="country">
+{#                            <option value="0">Select a country</option>
+                        </select>
+                    </tr>
+                    </table>
+                        <input type="submit" value="book" align="center" id="sub" class="btn btn-success">
+
+            </form>
+        </div>
+    </div>
+</div>
+    {% endfor %}
+{% else %}
+    <h2>data not there</h2>
+{% endif %}
+</body>
+</html>

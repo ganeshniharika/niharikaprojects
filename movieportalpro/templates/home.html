@@ -1,0 +1,38 @@
+<html>
+<head>
+    <title>lovemusic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<style>
+    form{
+        text-align: center;
+    }
+    input{
+        #padding-right: 20px;
+        text-align: center;
+    }
+    h2{
+        color:red;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+</style>
+<body>
+<div class="jumbotron">
+    <h2>We LoVE tHe MuSIc</h2>
+<form method="get" action="./movieportalapp/output">
+    {% csrf_token %}
+    <input type="submit" value="telugu" name="movie">&nbsp&nbsp
+    <input type="submit" value="english" name="movie">&nbsp&nbsp
+    <input type="submit" value="hindi" name="movie">
+</form>
+</div>
+{% block content %}
+
+    {% endblock %}
+</body>
+</html>
